@@ -14,7 +14,6 @@ export default class App extends React.Component {
     let peso = parseFloat(msg.peso);
     let altura = parseFloat(msg.altura);    
     imc = (peso/(altura*altura)).toFixed(2);
-
     if (imc <17) {
       Alert.alert('Muito abaixo do peso! '+ imc); 
     }else if(imc <= 18.49){
@@ -37,8 +36,8 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>        
         <Text style={styles.textField}>IMC</Text>
-        <TextInput style={styles.input} placeholder="Entre com sua Altura." onChangeText={(altura) => {this.setState({altura})} }/>
-        <TextInput style={styles.input} placeholder="Entre com seu Peso."  onChangeText={(peso) => {this.setState({peso})}}/>
+        <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com sua Altura." onChangeText={(altura) => {this.setState({altura})} }/>
+        <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com seu Peso."  onChangeText={(peso) => {this.setState({peso})}}/>
         <Button  title="Calcular" onPress={this.Calcular}/>
       </View>
     );
