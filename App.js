@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class App extends React.Component {
@@ -37,19 +37,21 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>        
-        <Text style={styles.textField}>IMC</Text>        
-        <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com sua Altura." onChangeText={(altura) => {this.setState({altura})} }/>
-        <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com seu Peso."  onChangeText={(peso) => {this.setState({peso})}}/>
-        <Button style={styles.button} title="Calcular" onPress={this.Calcular}
-          icon={<Icon 
-                name='calculator'
-                size={15}
-                color='white'
-          />}
-          iconRight
-        />        
-        <Text style={styles.result}>{this.state.imc}</Text>
+      <View style={styles.container}>               
+        <ScrollView style={styles.content}>
+          <Text style={styles.textField}>IMC</Text>        
+          <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com sua Altura." onChangeText={(altura) => {this.setState({altura})} }/>
+          <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com seu Peso."  onChangeText={(peso) => {this.setState({peso})}}/>
+          <Button style={styles.button} title="Calcular" onPress={this.Calcular}
+            icon={<Icon 
+                  name='calculator'
+                  size={15}
+                  color='white'
+            />}
+            iconRight
+          />        
+          <Text style={styles.result}>{this.state.imc}</Text>
+        </ScrollView>
       </View>
     );
   }
@@ -71,14 +73,11 @@ const styles = StyleSheet.create({
   input:{
     height: 40,
     borderWidth: 1,       
-    borderColor: 'black',
-    alignItems: 'center', 
-    padding: 10,
-    margin: 10
+    borderColor: 'black',    
+    margin:10
   }, 
   result:{
-    padding:10,
-    margin: 20,
+    margin:10,
     fontSize:30,
     color: 'green',
     alignSelf: 'center',
@@ -87,9 +86,11 @@ const styles = StyleSheet.create({
 
   button: {
     alignSelf:'center',
-    flex:1,
-    margin:20,
-    padding:10,
+    flex:1,    
     borderRadius: 30  
+  },
+  content: {
+    padding:10,
+    margin:20
   }
 });
