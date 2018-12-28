@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class App extends React.Component {
 
@@ -31,6 +32,7 @@ export default class App extends React.Component {
     }
           
     this.setState(msg);
+    
   }
 
   render() {
@@ -39,8 +41,15 @@ export default class App extends React.Component {
         <Text style={styles.textField}>IMC</Text>        
         <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com sua Altura." onChangeText={(altura) => {this.setState({altura})} }/>
         <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com seu Peso."  onChangeText={(peso) => {this.setState({peso})}}/>
-        <Button style={styles.button} title="Calcular" onPress={this.Calcular}/>        
-        <Text style={styles.result}>IMC:{this.state.imc}</Text>
+        <Button style={styles.button} title="Calcular" onPress={this.Calcular}
+          icon={<Icon 
+                name='calculator'
+                size={15}
+                color='white'
+          />}
+          iconRight
+        />        
+        <Text style={styles.result}>{this.state.imc}</Text>
       </View>
     );
   }
@@ -78,7 +87,9 @@ const styles = StyleSheet.create({
 
   button: {
     alignSelf:'center',
+    flex:1,
     margin:20,
-    padding:10
+    padding:10,
+    borderRadius: 30  
   }
 });
