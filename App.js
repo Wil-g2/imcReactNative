@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class App extends React.Component {
@@ -31,8 +31,9 @@ export default class App extends React.Component {
       msg.imc = `${imc} Obesidade III (mórbida)!`;
     }
           
-    this.setState(msg);
-    
+    msg.peso =  ''; 
+    msg.altura = ''; 
+    this.setState(msg);    
   }
 
   render() {
@@ -40,17 +41,15 @@ export default class App extends React.Component {
       <View style={styles.container}>               
         <ScrollView style={styles.content}>
           <Text style={styles.textField}>IMC</Text>        
-          <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com sua Altura." onChangeText={(altura) => {this.setState({altura})} }/>
-          <TextInput style={styles.input} keyboardType='numeric' placeholder="Entre com seu Peso."  onChangeText={(peso) => {this.setState({peso})}}/>
-          <Button style={styles.button} title="Calcular" onPress={this.Calcular}
-            icon={<Icon 
-                  name='calculator'
-                  size={15}
-                  color='white'
-            />}
-            iconRight
-          />        
-          <Text style={styles.result}>{this.state.imc}</Text>
+          <TextInput style={styles.input} value={this.state.altura} keyboardType='numeric' placeholder="Entre com sua Altura." onChangeText={(altura) => {this.setState({altura})} } clearButtonMode="always"/>
+          <TextInput style={styles.input} value={this.state.peso} keyboardType='numeric' placeholder="Entre com seu Peso."  onChangeText={(peso) => {this.setState({peso})}} clearButtonMode="always"/>
+          <TouchableOpacity style={styles.button} title="Calcular" onPress={this.Calcular}>
+            <View style={styles.viewButton}>
+              <Icon name="calculator" size={26} color="white"/>
+              <Text style={styles.textButton}>Calcular</Text>
+            </View>
+          </TouchableOpacity>
+          <Text style={styles.result}>{this.state.imc}</Text>          
         </ScrollView>
       </View>
     );
@@ -85,12 +84,22 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    alignSelf:'center',
-    flex:1,    
-    borderRadius: 30  
+    alignSelf:'center',   
+    borderRadius: 7,
+    backgroundColor:"#0000CD"     
   },
   content: {
     padding:10,
     margin:20
+  },
+  viewButton:{
+    width:260,
+    height:50,
+    textAlign: 'center',
+    alignItems: 'center',
+  },
+  textButton: {
+    textAlign: 'center',
+    color: 'white'
   }
 });
